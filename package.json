@@ -4,37 +4,16 @@
   "description": "Nette + Vue 3",
   "main": "index.js",
   "scripts": {
-    "vue-todo-app": "webpack --config ./scripts/webpack.vue.config.js --env.appname=todo-app",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "vue-todo-app": "vite build"
   },
   "author": "Pham The Anh",
   "license": "ISC",
   "dependencies": {
-    "autoprefixer": "^7.1.2",
-    "core-js": "^3.3.6",
-    "css-loader": "^0.28.11",
-    "cssnano": "^5.0.6",
-    "postcss": "^8.3.5",
-    "postcss-css-variables": "^0.13.0",
-    "postcss-cssnext": "^3.1.0",
-    "postcss-import": "^14.0.2",
-    "postcss-loader": "^2.1.5",
-    "style-loader": "^0.21.0",
-    "uglify-js": "^3.3.28",
-    "vue-i18n": "^8.14.1",
-    "vue-loader": "^15.7.1",
-    "vue-resource": "^1.5.1",
-    "vue-template-compiler": "^2.6.10",
-    "vuex": "^3.1.1"
+    "vite-plugin-vue2": "^1.4.0",
+    "vue": "^2.6.12",
+    "vue-template-compiler": "^2.6.12"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
-    "@babel/plugin-transform-object-assign": "^7.2.0",
-    "@babel/polyfill": "^7.7.0",
-    "@babel/preset-env": "^7.6.0",
-    "babel-loader": "^8.0.6",
-    "webpack": "^4.40.2",
-    "webpack-cli": "^3.3.11"
+    "vite": "^2.0.5"
   }
 }
