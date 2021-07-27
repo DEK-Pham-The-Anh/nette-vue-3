@@ -30,31 +30,45 @@ function customBuildPlugin() {
             });
         },
         generateBundle(options, bundle) {
-            // let manifestVue = path.resolve(__dirname, vueSrcDir, "manifest.json"); console.log('manifestVue', manifestVue);
-
-            // fs.readFile('/www/vue-development/src/manifest.json', function(err, data) {
-            //     console.log(data);
-            // });
-
             console.log('\nBundle contains ' + Object.keys(bundle).length + ' file(s).');
+            let scriptsCount = 0;
             
             for (const key in bundle) {
                 let item = bundle[key]; 
 
                 if (item.type == 'chunk' && item.facadeModuleId) {  // scripts
-
                     let facadeModuleIdArr = item.facadeModuleId.split('/');
                     let appName = facadeModuleIdArr[facadeModuleIdArr.length - 2];
 
                     item.fileName = appName + '.min.js';
-                
-                } else if (item.type == 'asset') {    // stylesheets
-                    
-                    // This is a problem here
+                    scriptsCount++;
+                } 
+            }
 
+            console.log(scriptsCount + ' scripts renamed.');
+        },
+        writeBundle(options, bundle) {
+            let manifest = JSON.parse(bundle['manifest.json'].source);
+            let stylesheetsCount = 0;
+
+            for (const key in manifest) {
+                let item = manifest[key];
+
+                if (item.isEntry) {
+                    let appName = item.file.split('.')[0];
+    
+                    if (item.css && item.css.length > 0) {
+                        let stylesheets = item.css;
+    
+                        for (var i = 0; i < stylesheets.length; i++) {
+                            bundle[stylesheets[i]].fileName = appName + '.min.css';
+                            stylesheetsCount++;
+                        }
+                    }
                 }
             }
 
+            console.log(stylesheetsCount + ' stylesheets renamed.');
         }
     };
 }
@@ -74,8 +88,7 @@ export default {
         rollupOptions: {
             input:  glob.sync(path.resolve(__dirname, "www/vue-development/app/*/", "index.js")),
             output: {
-                dir: vueSrcDir,
-                chunkFileNames: "[name]-[hash].js" 
+                dir: vueSrcDir
             }
         }
     }

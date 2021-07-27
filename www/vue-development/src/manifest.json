@@ -4,7 +4,7 @@
     "src": "www/vue-development/app/hello-world/index.js",
     "isEntry": true,
     "imports": [
-      "_vueComponentNormalizer-fb55faec.js"
+      "_vueComponentNormalizer.341b261c.js"
     ],
     "css": [
       "index.8d67cfc5.css"
@@ -15,13 +15,13 @@
     "src": "www/vue-development/app/todo-app/index.js",
     "isEntry": true,
     "imports": [
-      "_vueComponentNormalizer-fb55faec.js"
+      "_vueComponentNormalizer.341b261c.js"
     ],
     "css": [
       "index.c826916b.css"
     ]
   },
-  "_vueComponentNormalizer-fb55faec.js": {
-    "file": "vueComponentNormalizer-fb55faec.js"
+  "_vueComponentNormalizer.341b261c.js": {
+    "file": "vueComponentNormalizer.341b261c.js"
   }
 }
