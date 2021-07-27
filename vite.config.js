@@ -1,7 +1,11 @@
-import path from "path";
-import glob from "glob";
+import path from 'path';
+import glob from 'glob';
+
+const empty = require('empty-folder');
 
 const { createVuePlugin } = require('vite-plugin-vue2');
+
+const vueSrcDir = "www/vue-development/src";
 
 const reload = {
     name: 'reload',
@@ -15,8 +19,19 @@ const reload = {
     }
 }
 
+function emptyVueSrcDir() {
+    return {
+        buildStart() {
+            let dir = path.resolve(__dirname, vueSrcDir);
+            empty(dir, false, () => { 
+                console.log('\nFolder ' + dir + ' emptied.'); 
+            });
+        }
+    };
+}
+
 export default {
-    plugins: [reload, createVuePlugin()],
+    plugins: [reload, createVuePlugin(), emptyVueSrcDir()],
     server: {
         watch: {
             usePolling: true
@@ -26,11 +41,11 @@ export default {
         minify: true,
         manifest: true,
         assetsDir: '.',
-        emptyOutDir: false,
+        emptyOutDir: true,
         rollupOptions: {
             input:  glob.sync(path.resolve(__dirname, "www/vue-development/app/*/", "index.js")),
             output: {
-                dir: "www/vue-development/src/"
+                dir: vueSrcDir
             }
         }
     }

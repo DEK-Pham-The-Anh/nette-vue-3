@@ -18,10 +18,17 @@
 
 	{include content}
 
-	{block scripts}
+	{block vue_apps}
 		<script src="https://nette.github.io/resources/js/3/netteForms.min.js"></script>
-		{foreach $manifest_vue as $vue_app_script}
-			<script type="module" src="/vue-development/src/{$vue_app_script['file']}"></script>
+		{foreach $manifest_vue as $vue_app}
+			{if isset($vue_app['isEntry']) && $vue_app['isEntry'] == true}
+				<script type="module" src="/vue-development/src/{$vue_app['file']}"></script>
+				{if isset($vue_app['css'])}
+					{foreach $vue_app['css'] as $vue_app_styles}
+						<link rel="stylesheet" href="/vue-development/src/{$vue_app_styles}" />
+					{/foreach}
+				{/if}
+			{/if}
 		{/foreach}
 	{/block}
 </body>

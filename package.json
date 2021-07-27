@@ -9,8 +9,10 @@
   "author": "Pham The Anh",
   "license": "ISC",
   "dependencies": {
+    "empty-folder": "^2.0.4",
     "glob": "^7.1.7",
     "path": "^0.12.7",
+    "sass": "^1.36.0",
     "vite-plugin-vue2": "^1.4.0",
     "vue": "^2.6.12",
     "vue-template-compiler": "^2.6.12"
