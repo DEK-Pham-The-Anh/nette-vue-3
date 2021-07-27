@@ -1,27 +1,27 @@
 {
   "www/vue-development/app/hello-world/index.js": {
-    "file": "index.c4138090.js",
+    "file": "hello-world.min.js",
     "src": "www/vue-development/app/hello-world/index.js",
     "isEntry": true,
     "imports": [
-      "_vueComponentNormalizer.341b261c.js"
+      "_vueComponentNormalizer-fb55faec.js"
     ],
     "css": [
       "index.8d67cfc5.css"
     ]
   },
   "www/vue-development/app/todo-app/index.js": {
-    "file": "index.3adb4b02.js",
+    "file": "todo-app.min.js",
     "src": "www/vue-development/app/todo-app/index.js",
     "isEntry": true,
     "imports": [
-      "_vueComponentNormalizer.341b261c.js"
+      "_vueComponentNormalizer-fb55faec.js"
     ],
     "css": [
       "index.c826916b.css"
     ]
   },
-  "_vueComponentNormalizer.341b261c.js": {
-    "file": "vueComponentNormalizer.341b261c.js"
+  "_vueComponentNormalizer-fb55faec.js": {
+    "file": "vueComponentNormalizer-fb55faec.js"
   }
 }
