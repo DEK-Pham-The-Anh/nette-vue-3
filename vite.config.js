@@ -1,3 +1,6 @@
+import path from "path";
+import glob from "glob";
+
 const { createVuePlugin } = require('vite-plugin-vue2');
 
 const reload = {
@@ -21,15 +24,13 @@ export default {
     },
     build: {
         minify: true,
-        manifest: false,
-        // outDir: "www/vue-development/src",
+        manifest: true,
         assetsDir: '.',
         emptyOutDir: false,
         rollupOptions: {
-            input: "www/vue-development/app/todo-app/index.js",
+            input:  glob.sync(path.resolve(__dirname, "www/vue-development/app/*/", "index.js")),
             output: {
-                dir: "www/vue-development/src",
-                name: 'todo-app'
+                dir: "www/vue-development/src/"
             }
         }
     }

@@ -20,8 +20,9 @@
 
 	{block scripts}
 		<script src="https://nette.github.io/resources/js/3/netteForms.min.js"></script>
-		{* <script src="/vue-development/src/todo-app.min.js"></script> *}
-		<script src="/vue-development/src/assets/index.734d7b65.js"></script>
+		{foreach $manifest_vue as $vue_app_script}
+			<script type="module" src="/vue-development/src/{$vue_app_script['file']}"></script>
+		{/foreach}
 	{/block}
 </body>
 </html>

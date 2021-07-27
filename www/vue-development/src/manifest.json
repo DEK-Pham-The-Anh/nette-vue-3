@@ -1,0 +1,21 @@
+{
+  "www/vue-development/app/hello-world/index.js": {
+    "file": "index.90214ea8.js",
+    "src": "www/vue-development/app/hello-world/index.js",
+    "isEntry": true,
+    "imports": [
+      "_vueComponentNormalizer.341b261c.js"
+    ]
+  },
+  "www/vue-development/app/todo-app/index.js": {
+    "file": "index.35a1cc5e.js",
+    "src": "www/vue-development/app/todo-app/index.js",
+    "isEntry": true,
+    "imports": [
+      "_vueComponentNormalizer.341b261c.js"
+    ]
+  },
+  "_vueComponentNormalizer.341b261c.js": {
+    "file": "vueComponentNormalizer.341b261c.js"
+  }
+}

@@ -4,11 +4,13 @@
   "description": "Nette + Vue 3",
   "main": "index.js",
   "scripts": {
-    "vue-todo-app": "vite build"
+    "build-vue-apps": "vite build"
   },
   "author": "Pham The Anh",
   "license": "ISC",
   "dependencies": {
+    "glob": "^7.1.7",
+    "path": "^0.12.7",
     "vite-plugin-vue2": "^1.4.0",
     "vue": "^2.6.12",
     "vue-template-compiler": "^2.6.12"
