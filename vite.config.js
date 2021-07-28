@@ -4,6 +4,7 @@ import glob from 'glob';
 const empty = require('empty-folder');
 
 const fs = require('fs');
+const fsreplace = require('replace-in-file');
 
 const { createVuePlugin } = require('vite-plugin-vue2');
 
@@ -29,9 +30,9 @@ function customBuildPlugin() {
                 console.log('\nFolder ' + dir + ' emptied.'); 
             });
         },
-        generateBundle(options, bundle) {
+        generateBundle(options, bundle) { 
             console.log('\nBundle contains ' + Object.keys(bundle).length + ' file(s).');
-            let scriptsCount = 0;
+            let scripts = [];
             
             for (const key in bundle) {
                 let item = bundle[key]; 
@@ -41,15 +42,14 @@ function customBuildPlugin() {
                     let appName = facadeModuleIdArr[facadeModuleIdArr.length - 2];
 
                     item.fileName = appName + '.min.js';
-                    scriptsCount++;
+                    scripts.push(appName);
                 } 
             }
-
-            console.log(scriptsCount + ' scripts renamed.');
         },
         writeBundle(options, bundle) {
             let manifest = JSON.parse(bundle['manifest.json'].source);
-            let stylesheetsCount = 0;
+            let stylesheetsOld = [];
+            let stylesheetsNew = [];
 
             for (const key in manifest) {
                 let item = manifest[key];
@@ -61,14 +61,44 @@ function customBuildPlugin() {
                         let stylesheets = item.css;
     
                         for (var i = 0; i < stylesheets.length; i++) {
-                            bundle[stylesheets[i]].fileName = appName + '.min.css';
-                            stylesheetsCount++;
+                            let stylesheetNameOld = bundle[stylesheets[i]].fileName;
+                            let stylesheetNameNew = appName + '.min.css';
+
+                            bundle[stylesheets[i]].fileName = stylesheetNameNew;
+                            bundle[stylesheets[i]].name = stylesheetNameNew;
+
+                            manifest[key].css[i] = stylesheetNameNew;
+                            
+                            stylesheetsOld.push(stylesheetNameOld);
+                            stylesheetsNew.push(stylesheetNameNew);
+
+                            Object.defineProperty(bundle, stylesheetNameNew, Object.getOwnPropertyDescriptor(bundle, stylesheetNameOld));
+                            delete bundle[stylesheetNameOld];
                         }
                     }
                 }
             }
 
-            console.log(stylesheetsCount + ' stylesheets renamed.');
+            for (var i = 0; i < stylesheetsOld.length; i++) { 
+                fs.rename(path.resolve(__dirname, vueSrcDir, stylesheetsOld[i]), path.resolve(__dirname, vueSrcDir, stylesheetsNew[i]), function(err) {
+                    if (err) throw err;
+                });
+            }
+
+            let manifestFile = path.resolve(__dirname, vueSrcDir, 'manifest.json');
+            let stylesheetsOldRegexp = stylesheetsOld.map(el => new RegExp(el, 'gm'));
+            fsreplace({
+                files: manifestFile,
+                from: stylesheetsOldRegexp,
+                to: stylesheetsNew
+
+            }).then(changedFiles => {
+                    console.log('File manifest.json has been modified');
+                })
+                .catch(error => {
+                    console.error('Error while modifying manifest.json:', error);
+                });
+                
         }
     };
 }

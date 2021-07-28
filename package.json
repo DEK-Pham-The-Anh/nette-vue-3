@@ -12,6 +12,7 @@
     "empty-folder": "^2.0.4",
     "glob": "^7.1.7",
     "path": "^0.12.7",
+    "replace-in-file": "^6.2.0",
     "sass": "^1.36.0",
     "vite-plugin-vue2": "^1.4.0",
     "vue": "^2.6.12",

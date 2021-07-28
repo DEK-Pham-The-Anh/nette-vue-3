@@ -7,7 +7,7 @@
       "_vueComponentNormalizer.341b261c.js"
     ],
     "css": [
-      "index.8d67cfc5.css"
+      "hello-world.min.css"
     ]
   },
   "www/vue-development/app/todo-app/index.js": {
@@ -18,7 +18,7 @@
       "_vueComponentNormalizer.341b261c.js"
     ],
     "css": [
-      "index.c826916b.css"
+      "todo-app.min.css"
     ]
   },
   "_vueComponentNormalizer.341b261c.js": {
